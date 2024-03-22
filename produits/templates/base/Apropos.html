@@ -1,0 +1,60 @@
+{% extends 'main.html'%}
+
+{% block content %}
+
+  <link rel="stylesheet" href="chemin/vers/bootstrap.css">
+
+<body>
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-12">
+			<h1 style="font-family:Edwardian Script ITC; font-size: 76px;" class="text-primary">A propos de nous</h1>
+			<p class="lead" style="font-family: Georgia;">
+			  Bienvenue chez Pausedej, votre destination ultime pour tous vos besoins de shopping en ligne et en magasin! Nous sommes une boutique locale qui propose une large gamme de produits pour répondre à tous vos besoins. Que vous cherchiez à acheter en ligne et à vous faire livrer ou à venir directement dans notre boutique pour récupérer vos produits, nous avons tout ce dont vous avez besoin.
+			</p>
+			<p class="lead" style="font-family: Georgia; color: goldenrod;">
+			  Chez Pausedej, nous sommes passionnés par la qualité et la satisfaction de nos clients. Nous sommes fiers de proposer des produits de haute qualité à des prix compétitifs, tout en offrant un excellent service à la clientèle. Notre équipe est dévouée à fournir une expérience de shopping exceptionnelle, que ce soit en ligne ou en magasin. Nous sommes là pour répondre à toutes vos questions et pour vous aider à trouver les produits qui conviennent le mieux à vos besoins.
+			</p>
+			<p class="lead" style="font-family: Georgia;">
+			  Alors, qu'attendez-vous? Parcourez notre sélection de produits en ligne ou venez nous rendre visite dans notre boutique locale. Nous sommes impatients de vous aider à trouver les produits que vous recherchez chez Pausedej!
+			</p>
+			<p class="small">Notre emplacement</p>
+		  </div>
+		</div>
+	  </div>
+	  
+  <blockquote class="blockquote">
+    <p>Parcelles Assainies</p>
+	<div id="map"></div>
+
+	<script src="script.js"></script>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15432.262181908061!2d-17.420378449999998!3d14.7653373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2ssn!4v1710660661389!5m2!1sfr!2ssn" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	  <script >function initMap() {
+		// Coordonnées de votre adresse
+		var latLng = {lat: 14.7653373, lng:  -17.4203784};
+	  
+		// Créez une nouvelle carte centrée sur votre adresse
+		var map = new google.maps.Map(document.getElementById('map'), {
+		  zoom: 15,
+		  center: latLng
+		});
+	  
+		// Ajoutez un marqueur à votre adresse
+		var marker = new google.maps.Marker({
+		  position: latLng,
+		  map: map,
+		  title: 'Pause DEJ, villa 45, Parcelles assainie u4, Dakar 99341'
+		});
+	  }</script>
+	  <br> <br>
+    <footer class="blockquote-footer">Créé en 2021, Pause DEJ' est reconnu pour sa révolution dans le domaine du Snacking.
+		Nous prenons le temps de faire des recettes qui allient les nouveaux goûts et la fraîcheur des produits. Venez nous rendre visite</footer>
+  </blockquote>
+  <pre class="pre">Texte préformaté avec une police à largeur fixe</pre>
+  <mark>Texte mis en évidence avec un surligneur</mark>
+
+  <script src="chemin/vers/bootstrap.js"></script>
+</body>
+
+	
+{% endblock %}

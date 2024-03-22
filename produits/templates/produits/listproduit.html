@@ -1,0 +1,122 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <!-- Indicators -->
+    {% for produit in produits %}
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %} class="active" {% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    <!-- Slides -->
+    {% for produit in produits %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ produit.image.url }}" class="d-block w-100" alt="{{ produit.title }}" style="max-height: 300px; object-fit: cover;">
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<style>
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: auto;
+    color: #000; /* Couleur du texte */
+    background-color: rgba(255, 255, 255, 0.5); /* Couleur de fond */
+    border: none; /* Supprimer les bordures */
+    border-radius: 5px; /* Ajouter un peu de bord arrondi */
+    padding: 10px 15px; /* Ajuster le rembourrage pour une meilleure visibilité */
+    transition: background-color 0.3s ease; /* Transition de couleur de fond */
+  }
+
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Couleur de fond au survol */
+    color: #000; /* Couleur du texte au survol */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(100%); /* Inverser la couleur de l'icône */
+  }
+</style>
+
+<h1 class="text-center text-muted mt-5 mb-4" style='font-family:Edwardian Script ITC; font-size: 76px; '>Produits</h1>
+<div class="container-fluid bg-light py-4">
+  <div class="row justify-content-center">
+    {% for produit in produits %}
+      <div class="card col-10 col-md-6 col-lg-4 col-xl-3 mx-3 mb-4">
+        <div class="image-container">
+          <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.image }}">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ produit.title }}</h5>
+          <p class="card-text">{{ produit.description }}</p>
+          <p class="card-text"><strong>{{ produit.price }} fcfa</strong></p>
+          <div class="quantity buttons_added">
+        
+            <p>Quantite:
+            <strong>{{ produit.quantity }}</strong></p>
+  
+          </div>
+          <p class="card-text"><small class="text-muted">{{ produit.date_added }}</small></p>
+          <a class="btn btn-success btn-sm me-2" href="{% url 'add_to_cart' product_id=produit.id %}">Ajouter au panier</a>
+          <a class="btn btn-warning btn-sm" href="">Voir</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-container img {
+    transition: transform 0.3s ease;
+  }
+
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+      $(".plus").click(function() {
+          var quantityInput = $(this).siblings(".qty");
+          var currentValue = parseInt(quantityInput.val());
+          quantityInput.val(currentValue + 1);
+      });
+
+      $(".minus").click(function() {
+          var quantityInput = $(this).siblings(".qty");
+          var currentValue = parseInt(quantityInput.val());
+          if (currentValue > 1) {
+              quantityInput.val(currentValue - 1);
+          }
+      });
+  });
+</script>
+
+{% endblock %}

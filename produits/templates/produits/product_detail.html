@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <h1>Détails du produit</h1>
+
+  <div class="container" style="background-color: rgb(219, 157, 75);">
+    <div class="row">
+     
+        <div class="card col-3 col-md-6 col-lg-3 col-xl-3" style="margin-left: 58px;">
+            <div class="card-body">
+              <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.image }}">
+              <hr>
+              <h5 class="card-title"> {{ produit.title }} </h5>
+              <p class="card-text"> {{ produit.description }} </p>
+              <strong> {{ produit.price }} fcfa </strong>
+              <option value="{{ produit.quantity }}">Quantité:{{ produit.quantity }}</option>
+              <p> {{ produit.date_added }} </p>
+              <a href="{% url 'add_to_cart' product_id=produit.id %}"></a>
+              
+            </div>
+          </div>
+      </div>
+      </div>
+
+{% endblock %}
+

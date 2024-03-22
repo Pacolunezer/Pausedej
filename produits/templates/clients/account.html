@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Colonne gauche (informations du profil) -->
+            <div class="card">
+                
+                <div class="card-body">
+                    <h5 class="card-title"> <span class="icon-contact"></span>{{ user.prenom }} {{user.nom}} </h5>
+                    <p class="card-text">{{ profile.phone_number }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!-- Colonne droite (autres détails du profil) -->
+            <h2>Informations du profil</h2>
+            {% if is_authentificated %}
+            <ul>
+                <li>Nom complet : {{ user.nom}}</li>
+                <li>Email : {{ user.email }}</li>
+                <!-- Ajoutez d'autres détails du profil ici -->
+            </ul>
+            <a href="" class="btn btn-primary">compte</a>
+            {% else %}
+            <p>Vous ne disposer pas de compte</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<p>modifier</p>
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Prix : {{ produit.price }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" name="add" value="Ajouter">
+    <input type="submit" name="remove" value="Supprimer">
+    <input type="submit" name="edit" value="Modifier">
+{% endblock%}

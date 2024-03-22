@@ -1,0 +1,118 @@
+{% extends 'main.html' %}
+{% block content %}
+<script src="https://www.paypal.com/sdk/js?client-id=AeoBfIcCVUh3k184hpWYDXeqKNGH25bGtEw2_n6VbyZez4csoc-ZtpXjn4bLnKoYRmqOwT2eYJVNl36D"></script>
+
+<link href="https://doc.paytech.sn/downloads/sdk/paytech_android/paytech-sdk/build/outputs/aar/paytech-sdk-release.aar"
+>
+    
+<br>
+<style type='text/css'>
+  /* Définir une classe personnalisée pour réduire la taille des images */
+.small-img {
+      max-width: 100%; /* Assurez-vous que l'image ne dépasse pas la largeur du conteneur */
+      height: auto; /* Laissez la hauteur être déterminée automatiquement pour préserver les proportions */
+      max-height: 150px; /* Définissez une hauteur maximale pour l'image */
+  }
+  .card {
+    background-color: #f8f9fa; /* Couleur de fond du bloc de carte */
+    border: 1px solid #dee2e6; /* Bordure du bloc de carte */
+    border-radius: 10px; /* Coins arrondis du bloc de carte */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre du bloc de carte */
+    margin-bottom: 20px; /* Marge en bas du bloc de carte */
+  }
+  
+  .card-title {
+    font-weight: bold; /* Texte en gras pour le titre de la carte */
+  }
+  
+  .card-body {
+    padding: 20px; /* Remplissage à l'intérieur du bloc de carte */
+  }
+  
+  .personal-info-title {
+    font-family: 'Edwardian Script ITC'; /* Police pour le titre des informations personnelles */
+    font-size: 36px; /* Taille de police pour le titre des informations personnelles */
+    font-weight: bold; /* Texte en gras pour le titre des informations personnelles */
+  }
+</style>
+<div class="container">
+  <h1 style='font-family:Edwardian Script ITC; font-size: 76px;'>Récapitulatif de la Commande</h1>
+  <div class="row">
+      <!-- Afficher les détails de chaque article du panier -->
+      {% for item in cart_items %}
+          <div class="col-md-4 mb-4">
+              <div class="card">
+                  <img src="{{ item.product.image.url }}" class="card-img-top small-img" alt="{{ item.product.name }}">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ item.product.name }}</h5>
+                      <p class="card-text">Prix: {{ item.product.price }}</p>
+                         <!-- Afficher la quantité totale du produit -->
+                            <p class="card-text">Quantité totale: {{item.quantity }}</p>
+                  
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+          <!-- Afficher le total de la commande -->
+          <p class="text-right">Sous-total de la commande: {{ total_amount }}</p>
+      </div>
+  </div>
+  
+  <b>Somme en USD: {{ somme_en_usd }}</b>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 style='font-family:Edwardian Script ITC; font-size: 36px;'>Informations Personnelles</h1>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          {{ form.as_p }}
+                            
+                        </div>
+                        <!-- Ajoutez d'autres champs ici -->
+                        <button type="submit" class="btn btn-primary">Enregistrer la commande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            // Cette fonction est appelée lorsqu'un paiement est initialisé
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{ somme_en_usd  }}',// Montant du paiement
+                        currency_code: 'USD'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            // Cette fonction est appelée lorsque le paiement est approuvé
+            return actions.order.capture().then(function(details) {
+                // Affichez un message de confirmation ou redirigez l'utilisateur vers une page de confirmation
+                console.log('Transaction complétée avec succès: ', details);
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+
+{% endblock %}

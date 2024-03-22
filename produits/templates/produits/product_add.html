@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container" style="background-color: rgb(219, 157, 75);">
+  <div class="row">
+    <div class="card col-3 col-md-6 col-lg-3 col-xl-3" style="margin-left: 58px;">
+      <div class="card-body">
+        <!-- Ajout de la classe img-fluid pour que l'image soit responsive -->
+        <img src="{{ produit.image.url }}" alt="{{ produit.title }}" class="img-fluid" style="max-width: 100%;">
+        <h5 class="card-title"> {{ produit.title }} </h5>
+        <p class="card-text"> {{ produit.description }} </p>
+        <strong> {{ produit.price }} fcfa </strong>
+        <!-- Supprimer la balise <option> si elle n'est pas nécessaire -->
+        <p>Quantité: {{ produit.quantity }}</p>
+        <p> {{ produit.date_added }} </p>
+        <p>Êtes-vous sûr de vouloir ajouter ce produit ? Cette action ne peut pas être annulée.</p>
+        
+        <a href="{% url 'supprimer_produit' product_id=produit.id %}" class="btn btn-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

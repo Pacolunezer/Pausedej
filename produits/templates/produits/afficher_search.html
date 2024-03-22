@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    
+    <h3>Résultats de recherche pour "{{ query }}" :</h3>
+
+    {% if produits %}
+        <div class="row">
+            {% for produit in produits %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.title }}</h5>
+                            <p class="card-text">{{ produit.description }}</p>
+                            <p class="card-text"><strong>Prix :</strong> {{ produit.price }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun produit trouvé pour "{{ query }}"</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-secondary">Retour à la page d'accueil</a>
+
+{% endblock %}
