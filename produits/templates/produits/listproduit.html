@@ -1,30 +1,26 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <!-- Indicators -->
     {% for produit in produits %}
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %} class="active" {% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %} class="active" {% endif %} aria-label="Slide {{ forloop.counter }}"></button>
     {% endfor %}
   </div>
   <div class="carousel-inner">
     <!-- Slides -->
     {% for produit in produits %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ produit.image.url }}" class="d-block w-100" alt="{{ produit.title }}" style="max-height: 300px; object-fit: cover;">
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <div class="image-container d-flex justify-content-center align-items-center">
+        <img src="{{ produit.image.url }}" class="d-block w-90 img-fluid" alt="{{ produit.title }}">
       </div>
+    </div>
     {% endfor %}
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
+
 
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,7 +31,22 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
 <style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-container img {
+    transition: transform 0.3s ease;
+  }
+
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
   .carousel-control-prev,
   .carousel-control-next {
     width: auto;
@@ -62,11 +73,13 @@
 <h1 class="text-center text-muted mt-5 mb-4" style='font-family:Edwardian Script ITC; font-size: 76px; '>Produits</h1>
 <div class="container-fluid bg-light py-4">
   <div class="row justify-content-center">
+    <hr>
     {% for produit in produits %}
       <div class="card col-10 col-md-6 col-lg-4 col-xl-3 mx-3 mb-4">
         <div class="image-container">
           <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.image }}">
         </div>
+      <hr>
         <div class="card-body">
           <h5 class="card-title">{{ produit.title }}</h5>
           <p class="card-text">{{ produit.description }}</p>
@@ -86,37 +99,63 @@
   </div>
 </div>
 
-<style>
-  .image-container {
-    position: relative;
-    overflow: hidden;
-  }
 
-  .image-container img {
-    transition: transform 0.3s ease;
-  }
 
-  .image-container:hover img {
-    transform: scale(1.1);
-  }
-</style>
 
-<script>
-  $(document).ready(function() {
-      $(".plus").click(function() {
-          var quantityInput = $(this).siblings(".qty");
-          var currentValue = parseInt(quantityInput.val());
-          quantityInput.val(currentValue + 1);
-      });
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for produit in product %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <div class="container mt-6">
+        <div class="row justify-content-center" style="width:100%;">
+          <div class="col-md-6">
+            <div class="card shadow">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+              <div class="card-header bg-warning text-white">
+                <h1 style="font-family:Edwardian Script ITC; font-size: 76px;" class="text-center">{{produit.categorie}} </h1>
+              </div>
+              <div class="card-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
+                </svg>
+                <p class="lead">Profitez de l'offre</p>
+                <p class="lead"> <i class="bi bi-shop"></i> </p>
+                <div class="card">
+                  <div class="card-body">
+                    <img src="{{ produit.img.url }}" class="card-img-top" alt="{{ produit.img }}">
+                    <h5 class="card-title">{{ produit.title }}</h5>
+                    <p class="card-text">{{ produit.descriptions }}</p>
+                    <p class="card-text">Prix:<strong>{{ produit.prix }}</strong></p>
+                    <div class="quantity buttons_added">
+                      <p>Quantité: <strong> (x2) </strong></p>
+                    </div>
+                    <p class="card-text">    <strong>
+                      Promotion: Dans le scénario donné, la carte de fidélité est associée à l'achat de produits spécifiques, tels qu'un tacos et un portion de frites. Chaque fois qu'un client achète cette combinaison de produits, il peut présenter sa carte de fidélité et recevoir une récompense sous forme d'une cannette offerte.
 
-      $(".minus").click(function() {
-          var quantityInput = $(this).siblings(".qty");
-          var currentValue = parseInt(quantityInput.val());
-          if (currentValue > 1) {
-              quantityInput.val(currentValue - 1);
-          }
-      });
-  });
-</script>
+                      Ainsi, chaque fois qu'un client retourne dans le restaurant et achète un tacos et un portion de frites, il accumule des points sur sa carte de fidélité. Une fois qu'il atteint un certain nombre de points, il peut échanger ces points contre une récompense, qui est dans ce cas une cannette gratuite.
+                      
+                      Cette stratégie de fidélisation de la clientèle est bénéfique pour l'entreprise car elle encourage les clients à revenir régulièrement, ce qui peut entraîner une augmentation des ventes et une fidélité accrue à la marque. Cela crée également une relation de confiance et de fidélité entre l'entreprise et ses clients, ce qui peut conduire à une clientèle fidèle et satisfaite à long terme.</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    {% endfor %}
+  </div>
+</div>
+
+<br>
+<hr>
 
 {% endblock %}

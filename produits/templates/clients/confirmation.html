@@ -1,0 +1,57 @@
+<!-- confirmation.html -->
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="confirmation-frame">
+    <div class="confirmation-content">
+        <i class="fas fa-thumbs-up like-icon"></i>
+        <h1>Merci pour votre candidature !</h1>
+        <p class="confirmation-message">Nous avons bien reçu votre CV.</p>
+    </div>
+</div>
+<style type="text/css">
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+    
+    .confirmation-frame {
+        width: 80%;
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .confirmation-content {
+        position: relative;
+    }
+    
+    .like-icon {
+        color: #4CAF50;
+        font-size: 60px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .confirmation-message {
+        font-size: 16px;
+        color: #666;
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    
+</style>
+
+{% endblock %}

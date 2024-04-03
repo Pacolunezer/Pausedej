@@ -1,28 +1,52 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
-    
-    <h3>Résultats de recherche pour "{{ query }}" :</h3>
+<div class="container mt-5">
+    <h3 class="mb-4" style='font-family:Edwardian Script ITC; font-size: 76px;'>Résultats de recherche pour "{{ query }}" :</h3>
 
     {% if produits %}
-        <div class="row">
-            {% for produit in produits %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ produit.title }}</h5>
-                            <p class="card-text">{{ produit.description }}</p>
-                            <p class="card-text"><strong>Prix :</strong> {{ produit.price }}</p>
-                        </div>
-                    </div>
+    <div class="row">
+        {% for produit in produits %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow">
+                <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produit.title }}</h5>
+                    <p class="card-text">{{ produit.description }}</p>
+                    <p class="card-text"><strong>Prix :</strong> {{ produit.price }}</p>
+                    <p class="card-text"><strong>Quantité :</strong> {{ produit.quantity }}</p>
+                    <a href="{% url 'add_to_cart' product_id=produit.id %}" class="btn btn-success btn-sm me-2">Ajouter au panier</a>
                 </div>
-            {% endfor %}
+            </div>
         </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <p>Aucun produit trouvé pour "{{ query }}"</p>
+    <div id="container">
+        <img src="{% static 'images/oupps.png' %}" alt="Logo" class="img-fluid oupps-logo">
+        <p id="message">Oops! Votre recherche n'est pas approuvée.</p>
+        <div>
+            <strong>Veillez  renseigner votre recherche sur la barre de recherche en haut de la page </strong> 
+         </div>
+    </div>
+    <p class="mt-4">Aucun produit trouvé pour "{{ query }}"</p>
     {% endif %}
-
-    <a href="{% url 'home' %}" class="btn btn-secondary">Retour à la page d'accueil</a>
-
+    <style type="text/css">
+        #container {
+            text-align: center;
+            margin-top: 50px; /* Ajustez selon vos besoins */
+        }
+        
+        #logo {
+            width: 200px; /* Ajustez selon la taille de votre logo */
+        }
+        
+        #message {
+            font-size: 18px;
+            color: red;
+        }
+        
+    </style>
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Retour à la page d'accueil</a>
+</div>
 {% endblock %}

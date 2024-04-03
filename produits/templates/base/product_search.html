@@ -4,11 +4,24 @@
 
 <div class="card-body row no-gutters align-items-center">
   <form class="d-flex" role="search" method="GET" action="{% url 'rechercher_produits' %}">
+    {% csrf_token %}
       <div class="input-group">
           <input class="form-control" name="q" type="search" placeholder="Rechercher votre produit" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+          <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i>Rechercher</button>
       </div>
   </form>
 </div>
-       
+<style>
+  /* CSS pour augmenter la taille de la barre de recherche */
+  input[type="search"] {
+      width: 400px; /* Largeur souhaitée */
+      height: 80px; /* Hauteur souhaitée */
+      font-size: 18px; /* Taille de la police */
+      padding: 5px; /* Ajouter un peu d'espacement interne */
+  }
+  .q{
+    height:80px;
+    width: 80px;
+  }
+</style>
 {% endblock %}

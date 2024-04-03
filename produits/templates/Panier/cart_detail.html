@@ -4,84 +4,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-  /* Styles pour le tableau */
-  .table {
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .table thead th {
-    background-color: #f8f9fa;
-    color: #333;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .table tbody td {
-    background-color: #fff;
-    color: #333;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .table .subtotal {
-    font-weight: bold;
-  }
-
-  .table .subtotal.fcfa:before {
-    content: "fcfa";
-  }
-
-  .table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  .table tbody tr:hover {
-    background-color: #e2e6ea;
-  }
-
-  /* Styles pour les boutons */
-  .btn {
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 14px;
-    text-decoration: none;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-  }
-
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-
-  .btn-success {
-    background-color: #28a745;
-    color: #fff;
-  }
-
-  .btn-success:hover {
-    background-color: #218838;
-  }
-
-  .btn-warning {
-    background-color: #ffc107;
-    color: #333;
-  }
-
-  .btn-warning:hover {
-    background-color: #e0a800;
-  }
+  /* Vos styles CSS ici */
 </style>
 
 <div class="container">
-  <h1 style="font-family:Edwardian Script ITC; font-size: 76px;" class="my-4">Panier</h1>
+  <h1 style="font-family:Edwardian Script ITC; font-size: 76px;  text-align:center; color: rgb(101, 67, 33); " class="my-4">Panier</h1>
   <div class="row">
     <div class="col-md-12">
       <div class="table-responsive">
@@ -101,12 +28,14 @@
               <td>
                 <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.title }}" class="img-fluid" style="max-width: 100px;">
               </td>
+              <td>{{ cart_item.product.title }}</td>
               <td>{{ cart_item.product.description }}</td>
               <td>{{ cart_item.product.price }} fcfa</td>
-              <td>
+              <td> 
                 <strong>{{ cart_item.quantity }}</strong>
               </td>
               <td class="subtotal">{{ cart_item.subtotal }} fcfa</td>
+              <td> <a href="{% url 'supprimer_panier' product_id=cart_item.product.id %}" class="btn btn-danger btn-sm me-2">supprimer du panier</a></td>
             </tr>
             {% endfor %}
             <tr>
@@ -138,15 +67,16 @@
          vous pouvez commander en toute tranquillité,
           sachant que vous ne payerez que lorsque vous aurez reçu vos articles.</p>
           <p>
-            <i class="bi bi-telephone-fill"></i> Téléphone : <a href="tel:+33751487308">+33751487308</a><br>
-            <i class="bi bi-whatsapp"></i> WhatsApp : <a href="https://wa.me/337514873089">+33751487308</a>
+            <i class="bi bi-telephone-fill"></i> Téléphone : <a href="tel:+22177 809 74 07">+22177 809 74 07</a><br>
+            <i class="bi bi-whatsapp"></i> WhatsApp : <a href="https://wa.me/337514873089">+22177 809 74 07</a><br>
+            <i class="fas fa-map-marker-alt">Parcelles Assainies unite 4</i>
           </p>
       </div>
     </div>
   </div>
 </div>
   </div>
-</div>
+</div> <br>
 
 <script>
   // Votre script JavaScript ici

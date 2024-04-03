@@ -1,20 +1,39 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<head>
-  <title>Confirmation de suppression</title>
-</head>
-<body>
-  <h1>Confirmation de suppression</h1>
-  <p>Voulez-vous vraiment supprimer ce produit  ?</p>
-  <div class="container" style="background-color: rgb(156, 146, 146);">
-    <h1> {{produit.title}} </h1>
-     <p> Prix:{{produit.price}}</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+          <h1 class="text-center">Confirmation de suppression</h1>
+        </div>
+        <div class="card-body">
+          <p class="lead">Voulez-vous vraiment supprimer ce produit ?</p>
+          <p class="lead">Ceci supprimmera  rajouter</p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ cart_items.product.title }}</h5>
+              <p class="card-text">{{ cart_items.product.description }}</p>
+              <p class="card-text"><strong> {{ cart_items.subtotal }}  FCFA</strong></p>
+              <div class="quantity buttons_added">
+                <p>Quantité: <strong>{{ cart_items.quantity }}</strong></p>
+              </div>
+              <p class="card-text"><small class="text-muted">{{ cart_items.product.date_added }}</small></p>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <form method="post" >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger mr-2">Confirmer la suppression</button>
+              <a href={% url 'view_cart' %} class="btn btn-warning mr-2">annuler</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <form method="post">
-      {% csrf_token %}
-      <input type="submit" value="Confirmer la suppression">
-      <a href="{% url 'editer_produit' produit.id  %}">Annuler</a>
-  </form>
-</body>
+</div>
+<br>
+<hr>
 {% endblock %}
